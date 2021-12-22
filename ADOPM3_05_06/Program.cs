@@ -18,18 +18,22 @@ namespace ADOPM3_05_06
             factor = 20; 
             foreach (int i in query) Console.WriteLine(i); // Execute my query: 20, 40
 
-
+            
             // Deferred execution in for loops as iteration variables are capured by LE as scoped outside the loop
             IEnumerable<char> query1 = "!A simple_ _sentence?";
             
-            //"Now, let's remove everything expect !_? by updating our query
+            //"Now, let's remove !_? by updating our query
             string remove = "!_?";
 
             for (int i = 0; i < remove.Length; i++)
-                query1 = query1.Where(c => c != remove[i]);   // Update query
+            {
+                int n = i;
+                query1 = query1.Where(c => c != remove[n]);   // Update query
+            }
 
             foreach (char c in query1) Console.Write(c); //Execute my query: 
                                                           //Expected Output: A simple sentence
+            
         }
     }
     //Exercise:

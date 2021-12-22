@@ -39,13 +39,15 @@ namespace ADOPM3_05_09
             originalList.OrderByDescending(r => r.Area).ThenBy(r => r.Color)
                         .ToList().ForEach(r => Console.WriteLine(r));
 
+            
             //Play around with GroupBy            
             Console.WriteLine();
             var groupedList = originalList.GroupBy(r => r.Color, r => r); //groupedList is IEnumerable<IGrouping<RectColor, Rectangle>>
-
+            
             //Print it out
             groupedList.ToList().ForEach(r => r.ToList().ForEach(r=>Console.WriteLine(r)));
 
+            
             //Make an explicit iteration over the Group to illustrate 
             Console.WriteLine();
             foreach (IGrouping<RectColor, Rectangle> colorGroups in groupedList)

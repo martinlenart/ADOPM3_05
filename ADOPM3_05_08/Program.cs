@@ -51,10 +51,12 @@ namespace ADOPM3_05_08
                         .ToList().ForEach( e => Console.WriteLine($"Color: {e.Color}  Area: {e.Area}  Message: {e.Message}"));
                         //All rectangles with Message added according to Color
 
+            
             //return only rectangles whith a matching position of true in selectList
             originalList.Zip(selectList, (r, b) => b ? r : null).Where(r => r is not null)
                         .ToList().ForEach(e => Console.WriteLine($"Color: {e.Color}  Area: {e.Area}"));
                         //white, red, pink, blue
+            
         }
 
         //Exercise:

@@ -19,6 +19,14 @@ namespace ADOPM3_05_03
             public bool Equals(Rectangle other) => (Height, Width, Color) == (other.Height, other.Width, other.Color);
             public override int GetHashCode() => (Width, Height, Color).GetHashCode();  //Needed to implement as part of IEquatable
             public override bool Equals(object obj) => Equals(obj as Rectangle); //Needed to implement as part of IEquatable
+
+            public Rectangle() { }
+            public Rectangle(Rectangle src)
+            {
+                this.Color = src.Color;
+                this.Height = src.Height;
+                this.Width = src.Width;
+            }
         }
         static void Main(string[] args)
         {
@@ -40,6 +48,9 @@ namespace ADOPM3_05_03
             IEnumerable<int> listAreas = originalList.Where(r => r.Height > 15).OrderBy(r => r.Area).Select(r => r.Area);
             
             listAreas.ToList().ForEach(i => Console.WriteLine(i)); // 675, 10000, 11250
+
+            //Use Select for Deep copy
+            var deepCopyList = originalList.Where(r => r.Height > 15).OrderBy(r => r.Area).Select(r => new Rectangle(r));
         }
     }
 }
