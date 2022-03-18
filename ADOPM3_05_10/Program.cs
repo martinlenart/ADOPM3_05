@@ -21,6 +21,12 @@ namespace ADOPM3_05_10
             public override bool Equals(object obj) => Equals(obj as Rectangle); //Needed to implement as part of IEquatable
             public override string ToString() => $"Color: {Color}  Height: {Height}  Width: {Width}  Area: {Area}";
         }
+        public class ColorComparer : EqualityComparer<Rectangle>
+        {
+            public override bool Equals(Rectangle x, Rectangle y) => x.Color == y.Color;
+            public override int GetHashCode(Rectangle r) => r.Color.GetHashCode();
+        }
+
         static void Main(string[] args)
         {
             var List1 = new List<Rectangle>() {
@@ -48,8 +54,15 @@ namespace ADOPM3_05_10
 
             //Distinct
             Console.WriteLine();
-            List1.Distinct()
+
+            //No duplicates using IEquatable<Rectangle> to determine equality
+            List1.Union(List2).Distinct()
                         .ToList().ForEach(r => Console.WriteLine(r)); // only those that are no duplicates
+                                                                      //No duplicates using IEquatable<Rectangle> to determine equality
+
+            Console.WriteLine();
+            List1.Union(List2).Distinct(new ColorComparer())
+                        .ToList().ForEach(r => Console.WriteLine(r)); // only one from each color
         }
 
         //Exercise:

@@ -10,6 +10,13 @@ namespace ADOPM3_05_01
 			if (string.IsNullOrEmpty(s)) return false;
 			return char.IsUpper(s[0]);
 		}
+		public static string Capitalize(this string s)
+		{
+			if (string.IsNullOrEmpty(s)) return s;
+
+			return char.ToUpper(s[0]) + s.Substring(1);
+		}
+
 		public static char MyUpper(this char c) => char.ToUpper(c); //Note the type extended is char
 
 		public static T First<T>(this IEnumerable<T> sequence)
@@ -35,14 +42,18 @@ namespace ADOPM3_05_01
 			Console.WriteLine("Perth".IsCapitalized()); // Using the Method as an extension
 			Console.WriteLine(StringHelper.IsCapitalized("Perth"));  // Using it in a classic way
 
+            Console.WriteLine("martin".Capitalize());
+			
 			Console.WriteLine("Seatle".First());   // S
 
+			
 			//chain Extension Methods
 			Console.WriteLine("stockholm".First().MyUpper()); //S
 
 			string[] strings = { "a", "b", null, "c" };
 			foreach (string s in strings.StripNulls())
 				Console.WriteLine(s);
+			
 		}
 	}
 	

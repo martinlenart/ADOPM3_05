@@ -32,7 +32,7 @@ namespace ADOPM3_05_06
             }
 
             foreach (char c in query1) Console.Write(c); //Execute my query: 
-                                                          //Expected Output: A simple sentence
+                                                         //Expected Output: A simple sentence
             
         }
     }
