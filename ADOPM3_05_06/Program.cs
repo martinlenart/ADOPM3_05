@@ -20,18 +20,17 @@ namespace ADOPM3_05_06
 
             
             // Deferred execution in for loops as iteration variables are capured by LE as scoped outside the loop
-            IEnumerable<char> query1 = "!A simple_ _sentence?";
+            IEnumerable<char> sentence = "!A simple_ _sentence?";
             
             //"Now, let's remove !_? by updating our query
-            string remove = "!_?";
-
-            for (int i = 0; i < remove.Length; i++)
+            string removeChar = "!_?A";
+            for (int i = 0; i <= removeChar.Length; i++)
             {
                 int n = i;
-                query1 = query1.Where(c => c != remove[n]);   // Update query
+                sentence = sentence.Where(c => c != removeChar[n]);   // Update query
             }
 
-            foreach (char c in query1) Console.Write(c); //Execute my query: 
+            foreach (char c in sentence) Console.Write(c); //Execute my query: 
                                                          //Expected Output: A simple sentence
             
         }

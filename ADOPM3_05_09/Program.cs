@@ -45,7 +45,7 @@ namespace ADOPM3_05_09
             var groupedList = originalList.GroupBy(r => r.Color, r => r); //groupedList is IEnumerable<IGrouping<RectColor, Rectangle>>
             
             //Print it out
-            groupedList.ToList().ForEach(r => r.ToList().ForEach(r=>Console.WriteLine(r)));
+            //groupedList.ToList().ForEach(r => r.ToList().ForEach(r=>Console.WriteLine(r)));
 
             
             //Make an explicit iteration over the Group to illustrate 
@@ -54,8 +54,13 @@ namespace ADOPM3_05_09
             {
                 // Print the key value of the IGrouping.
                 Console.WriteLine(colorGroups.Key);
-                colorGroups.ToList().ForEach(r => Console.WriteLine(r));
+                foreach (var item in colorGroups)
+                {
+                    Console.WriteLine(item);
+                }
+                //colorGroups.ToList().ForEach(r => Console.WriteLine(r));
             }
+            
         }
 
         //Exercise:
