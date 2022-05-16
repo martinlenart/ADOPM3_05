@@ -17,14 +17,15 @@ namespace ADOPM3_05_01
 			return char.ToUpper(s[0]) + s.Substring(1);
 		}
 
-		public static char MyUpper(this char c) => char.ToUpper(c); //Note the type extended is char
-
 		public static T First<T>(this IEnumerable<T> sequence)
 		{
 			foreach (T element in sequence)
 				return element;
 			throw new InvalidOperationException("No elements!");
 		}
+
+		public static char MyUpper(this char c) => char.ToUpper(c); //Note the type extended is char
+
 	}
 	static class IEnumerableHelper
 	{
