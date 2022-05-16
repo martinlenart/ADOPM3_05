@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ADOPM3_05_01
 {
- 	public static class StringHelper
+ 	public static class StringExtension
 	{
 		public static bool IsCapitalized(this string s)
 		{
@@ -18,12 +18,12 @@ namespace ADOPM3_05_01
 		}
 	}
 
-	public static class CharHelper
+	public static class CharExtension
 	{
-		public static char MyUpper(this char c) => char.ToUpper(c); //Note the type extended is char
+		public static char ToUpper(this char c) => char.ToUpper(c); //Note the type extended is char
 	}
 
-	static class IEnumerableHelper
+	static class IEnumerableExtension
 	{
 		public static T First<T>(this IEnumerable<T> sequence)
 		{
@@ -44,15 +44,17 @@ namespace ADOPM3_05_01
 		static void Main(string[] args)
         {
 			Console.WriteLine("Perth".IsCapitalized()); // Using the Method as an extension
-			Console.WriteLine(StringHelper.IsCapitalized("Perth"));  // Using it in a classic way
+			Console.WriteLine(StringExtension.IsCapitalized("Perth"));  // Using it in a classic way
 
             Console.WriteLine("martin".Capitalize());
 			
 			Console.WriteLine("Seatle".First());   // S
 
-			
+
 			//chain Extension Methods
-			Console.WriteLine("stockholm".First().MyUpper()); //S
+			Console.WriteLine(IEnumerableExtension.First("stockholm").ToUpper()); //S
+
+			Console.WriteLine("stockholm".First().ToUpper()); //S
 
 			string[] strings = { "a", "b", null, "c" };
 			foreach (string s in strings.StripNulls())
