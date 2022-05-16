@@ -16,7 +16,15 @@ namespace ADOPM3_05_01
 
 			return char.ToUpper(s[0]) + s.Substring(1);
 		}
+	}
 
+	public static class CharHelper
+	{
+		public static char MyUpper(this char c) => char.ToUpper(c); //Note the type extended is char
+	}
+
+	static class IEnumerableHelper
+	{
 		public static T First<T>(this IEnumerable<T> sequence)
 		{
 			foreach (T element in sequence)
@@ -24,11 +32,6 @@ namespace ADOPM3_05_01
 			throw new InvalidOperationException("No elements!");
 		}
 
-		public static char MyUpper(this char c) => char.ToUpper(c); //Note the type extended is char
-
-	}
-	static class IEnumerableHelper
-	{
 		public static IEnumerable<T> StripNulls<T>(this IEnumerable<T> seq)
 		{
 			foreach (T t in seq)
