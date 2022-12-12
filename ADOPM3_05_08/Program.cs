@@ -50,21 +50,19 @@ namespace ADOPM3_05_08
                 new AlertMessage() { Color = RectColor.white, Message = "A Message for all the White Rectangles" },
                 new AlertMessage() { Color = RectColor.pink, Message = "A Message for all the Pink Rectangles" }};
 
-            //Generate a sequence joining originalList and messageList around the joinKey Color
+            //Use Join to list all rectangles with Message added according to Color
             Console.WriteLine("Join");
             var myAnoList = originalList.Join(messageList, r => r.Color, m => m.Color, (r, m) => new { Color = r.Color, Area = r.Area, Message = m.Message });
             myAnoList.ToList().ForEach( e => Console.WriteLine($"Color: {e.Color}  Area: {e.Area}  Message: {e.Message}"));
 
+            //Use Join to create a new list of CombinedElement
+            Console.WriteLine();
             var myList = originalList.Join(messageList, r => r.Color, m => m.Color, (r, m) => new CombinedElement { rect=r, alert=m });
-            myList.ToList().ForEach(e => Console.WriteLine($"Color: {e.rect.Area}  Message: {e.alert.Message}"));
+            myList.ToList().ForEach(e => Console.WriteLine($"Color: {e.rect.Color}  Message: {e.alert.Message}"));
 
-
-            //All rectangles with Message added according to Color
-
-
-            var selectList = new bool[] { false, true, true, false, false, true, true };
 
             //return only rectangles whith a matching position of true in selectList
+            var selectList = new bool[] { false, true, true, false, false, true, true };
             Console.WriteLine("\nZip");
             originalList.Zip(selectList, (r, b) =>
             {
@@ -74,6 +72,8 @@ namespace ADOPM3_05_08
               .ToList().ForEach(e => Console.WriteLine($"Color: {e.Color}  Area: {e.Area}"));
                         //white, red, pink, blue
             
+
+
         }
 
         //Exercise:
