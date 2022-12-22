@@ -42,10 +42,10 @@ namespace ADOPM3_05_09
             
             //Play around with GroupBy            
             Console.WriteLine();
-            var groupedList = originalList.GroupBy(r => r.Color, r => r); //groupedList is IEnumerable<IGrouping<RectColor, Rectangle>>
+            var groupedList = originalList.GroupBy(r => r.Color); //groupedList is IEnumerable<IGrouping<RectColor, Rectangle>>
             
             //Print it out
-            groupedList.ToList().ForEach(r => r.ToList().ForEach(r=>Console.WriteLine(r)));
+            //groupedList.ToList().ForEach(r => r.ToList().ForEach(r=>Console.WriteLine(r)));
 
             
             //Make an explicit iteration over the Group to illustrate 

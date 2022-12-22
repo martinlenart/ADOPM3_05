@@ -40,7 +40,7 @@ namespace ADOPM3_05_03
                 new Rectangle() { Color = RectColor.blue, Height = 10, Width = 20 }};
 
             //Nest Where and OrderBy using Linq fluent syntax
-            IEnumerable<Rectangle> list = originalList.Where(r => r.Height > 15).OrderBy(r => r.Area);
+            IEnumerable<Rectangle> list = originalList.Where(r => r.Height > 15).OrderBy(r => r.Area).Reverse();
 
             list.ToList().ForEach(r => Console.WriteLine(r.Area)); // 675, 10000, 11250
 

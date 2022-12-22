@@ -19,6 +19,8 @@ namespace ADOPM3_05_08
             public bool Equals(Rectangle other) => (Height, Width, Color) == (other.Height, other.Width, other.Color);
             public override int GetHashCode() => (Width, Height, Color).GetHashCode();  //Needed to implement as part of IEquatable
             public override bool Equals(object obj) => Equals(obj as Rectangle); //Needed to implement as part of IEquatable
+
+            public override string ToString() => $" {Color} rectangle. Height:{Height}, width:{Width}, area: {Area}";
         }
         public class AlertMessage
         {
@@ -26,11 +28,19 @@ namespace ADOPM3_05_08
             public string Message { get; set; }
         }
 
-        public class CombinedElement
+        public class RectangleAlert
         {
             public Rectangle rect { get; set; }
             public AlertMessage alert { get; set; }
         }
+
+        public class AlertRectangles
+        {
+            public AlertMessage alert { get; set; }
+            public IEnumerable<Rectangle> rectangles { get; set; }
+        }
+
+
 
         static void Main(string[] args)
         {
@@ -50,16 +60,31 @@ namespace ADOPM3_05_08
                 new AlertMessage() { Color = RectColor.white, Message = "A Message for all the White Rectangles" },
                 new AlertMessage() { Color = RectColor.pink, Message = "A Message for all the Pink Rectangles" }};
 
+
+
             //Use Join to list all rectangles with Message added according to Color
-            Console.WriteLine("Join");
+            Console.WriteLine("\nJoin");
             var myAnoList = originalList.Join(messageList, r => r.Color, m => m.Color, (r, m) => new { Color = r.Color, Area = r.Area, Message = m.Message });
             myAnoList.ToList().ForEach( e => Console.WriteLine($"Color: {e.Color}  Area: {e.Area}  Message: {e.Message}"));
 
             //Use Join to create a new list of CombinedElement
             Console.WriteLine();
-            var myList = originalList.Join(messageList, r => r.Color, m => m.Color, (r, m) => new CombinedElement { rect=r, alert=m });
+            var myList = originalList.Join(messageList, r => r.Color, m => m.Color, (r, m) => new RectangleAlert { rect=r, alert=m });
             myList.ToList().ForEach(e => Console.WriteLine($"Color: {e.rect.Color}  Message: {e.alert.Message}"));
 
+            //Use GroupJoin to Join and create groups of Alerts
+            Console.WriteLine("\nGroupJoin");
+            var Alerts = messageList.GroupJoin(originalList, a => a.Color, r => r.Color,
+                            (alert, rectangles) => new AlertRectangles { alert = alert, rectangles = rectangles });
+
+            foreach (var alert in Alerts)
+            {
+                Console.WriteLine(alert.alert.Message);
+                foreach (var item in alert.rectangles)
+                {
+                    Console.WriteLine($"   - {item}");
+                }
+            }
 
             //return only rectangles whith a matching position of true in selectList
             var selectList = new bool[] { false, true, true, false, false, true, true };
