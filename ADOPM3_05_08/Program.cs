@@ -70,7 +70,7 @@ namespace ADOPM3_05_08
             //Use Join to create a new list of CombinedElement
             Console.WriteLine();
             var myList = originalList.Join(messageList, r => r.Color, m => m.Color, (r, m) => new RectangleAlert { rect=r, alert=m });
-            myList.ToList().ForEach(e => Console.WriteLine($"Color: {e.rect.Color}  Message: {e.alert.Message}"));
+            myList.ToList().ForEach(e => Console.WriteLine($"Rect: {e.rect}  Message: {e.alert.Message}"));
 
             //Use GroupJoin to Join and create groups of Alerts
             Console.WriteLine("\nGroupJoin");
